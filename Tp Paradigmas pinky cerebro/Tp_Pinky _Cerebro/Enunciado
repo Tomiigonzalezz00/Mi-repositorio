@@ -1,0 +1,10 @@
+En el laboratorio de la compañía ACME, científicos modifican genéticamente a animales para darles capacidades especiales. De estos experimentos surgieron, entre otros, Pinky y Cerebro, uno es un genio, y el otro no es tan cuerdo. 
+Para ayudar a los científicos en esta compleja tarea, nos han pedido que simulemos sus experimentos, resolviendo los siguientes problemas y explicitando el tipo de todas las funciones principales: 
+
+1. Modelar a los animales: De ellos se sabe su coeficiente intelectual (un número), su especie (que puede ser Elefante, Ratón, o un Perro, del cual conocemos su raza) y sus capacidades (strings). Definir algunos ejemplos de animales.
+
+2. Transformar a un animal de laboratorio:
+    •inteligenciaSuperior: Incrementa en n unidades su coeficiente intelectual.
+    •pinkificar: Quita todas las habilidades que tiene el animal.
+    •nuevoComienzo: Pinkifica al animal y luego le incrementa el coeficiente intelectual en 20 y le agrega el superpoder “aprendizaje rapido”.
+        ○ Nota: Usar composición de funciones. 
