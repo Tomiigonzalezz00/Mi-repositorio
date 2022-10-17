@@ -74,3 +74,4 @@ cambiarEspecie animal
     | raza (especie animal) == "Dogo" = animal { especie = Elefante}
     | otherwise = animal {especie = Raton}
 
+--Ejercicio 3
