@@ -2,6 +2,7 @@
 -- Modelo los Animales 
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# HLINT ignore "Redundant bracket" #-}
+{-# HLINT ignore "Use infix" #-}
 data Animal = Animal
     { iq :: Int,
       especie :: Especie,
@@ -74,4 +75,17 @@ cambiarEspecie animal
     | raza (especie animal) == "Dogo" = animal { especie = Elefante}
     | otherwise = animal {especie = Raton}
 
---Ejercicio 3
+--Ejercicio 3 
+
+
+anotropomorfico :: Animal -> Bool
+anotropomorfico animal = (tieneLaHabilidad "hablar" animal) && (iq animal > 60 )
+
+tieneLaHabilidad :: String -> Animal -> Bool
+tieneLaHabilidad capacidad animal = elem capacidad (capacidades animal)
+
+empiezaConHacer :: String -> Bool
+empiezaConHacer = (== "hacer").take 6 
+
+vocal :: Char -> Bool
+vocal letra = any (letra==) "aeiou"
