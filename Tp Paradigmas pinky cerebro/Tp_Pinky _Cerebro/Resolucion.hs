@@ -3,6 +3,7 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# HLINT ignore "Redundant bracket" #-}
 {-# HLINT ignore "Use infix" #-}
+{-# HLINT ignore "Use elem" #-}
 data Animal = Animal
     { iq :: Int,
       especie :: Especie,
@@ -87,5 +88,10 @@ tieneLaHabilidad capacidad animal = elem capacidad (capacidades animal)
 empiezaConHacer :: String -> Bool
 empiezaConHacer = (== "hacer").take 6 
 
+vocales = "aeiou"
+
 vocal :: Char -> Bool
-vocal letra = any (letra==) "aeiou"
+vocal letra = any (letra==) vocales
+
+
+contieneVocal palabra = any (vocal) palabra
