@@ -88,10 +88,10 @@ tieneLaHabilidad capacidad animal = elem capacidad (capacidades animal)
 empiezaConHacer :: String -> Bool
 empiezaConHacer = (== "hacer").take 6 
 
-vocales = "aeiou"
 
 vocal :: Char -> Bool
-vocal letra = any (letra==) vocales
+vocal letra = any (letra==) ["a","e","i","o","u"]
 
 
-contieneVocal palabra = any (vocal) palabra
+contieneVocal :: Foldable t => t Char -> Bool
+contieneVocal palabra = any vocal palabra
