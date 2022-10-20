@@ -88,14 +88,21 @@ tieneLaHabilidad capacidad animal = elem capacidad (capacidades animal)
 empiezaConHacer :: String -> Bool
 empiezaConHacer = (== "hacer").take 6 
 
-habilidadSinhacer :: [a] -> [a]
-habilidadSinhacer = drop 6
+habilidadSinHacer :: [a] -> [a]
+habilidadSinHacer = drop 6
 
 vocal :: Char -> Bool
 vocal letra = any (letra==) "aeiou"
 
 
-contieneVocal :: Foldable t => t Char -> Bool
-contieneVocal palabra = any vocal palabra
+sinHacer :: [a] -> [a]
+sinHacer = drop 6 
 
---pinkiesco habilidad = empiezaConHacer habilidad && contieneVocal.habilidadSinHacer habilidad && (<4).habilidadSinHacer habilidad
+contieneVocal ::  [Char] -> Bool
+contieneVocal = any vocal 
+
+esPinkiesca :: [a] -> Bool
+esPinkiesca = (<= 4).length.sinHacer
+
+pinkiesco :: String -> Bool
+pinkiesco habilidad = empiezaConHacer habilidad && contieneVocal (sinHacer habilidad) && esPinkiesca habilidad
