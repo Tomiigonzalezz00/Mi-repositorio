@@ -90,7 +90,7 @@ empiezaConHacer = (== "hacer").take 6
 
 
 vocal :: Char -> Bool
-vocal letra = any (letra==) ["a","e","i","o","u"]
+vocal letra = any (letra==) "aeiou"
 
 
 contieneVocal :: Foldable t => t Char -> Bool
