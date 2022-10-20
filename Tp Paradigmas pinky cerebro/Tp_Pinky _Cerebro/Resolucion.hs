@@ -86,7 +86,7 @@ tieneLaHabilidad :: String -> Animal -> Bool
 tieneLaHabilidad capacidad animal = elem capacidad (capacidades animal)
 
 empiezaConHacer :: String -> Bool
-empiezaConHacer = (== "hacer").take 6 
+empiezaConHacer = (== "hacer ").take 6 
 
 habilidadSinHacer :: [a] -> [a]
 habilidadSinHacer = drop 6
@@ -106,3 +106,6 @@ esPinkiesca = (<= 4).length.sinHacer
 
 pinkiesco :: String -> Bool
 pinkiesco habilidad = empiezaConHacer habilidad && contieneVocal (sinHacer habilidad) && esPinkiesca habilidad
+
+--Ejercicio 4 
+
