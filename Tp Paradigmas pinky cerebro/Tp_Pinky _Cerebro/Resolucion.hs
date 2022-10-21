@@ -72,7 +72,7 @@ razaPar animal = (especie animal == Perro (raza (especie animal)) ) && (even.len
 cambiarEspecie :: Animal -> Animal
 cambiarEspecie animal 
     | (especie animal == Elefante) = animal{ especie = Raton}
-    | (especie animal == Raton) = animal {especie = Perro ("Chiuaua")}
+    | (especie animal == Raton) = animal {especie = Perro ("Chiuahua")}
     | raza (especie animal) == "Dogo" = animal { especie = Elefante}
     | otherwise = animal {especie = Raton}
 
@@ -109,8 +109,16 @@ pinkiesco habilidad = empiezaConHacer habilidad && contieneVocal (sinHacer habil
 
 --Ejercicio 4 
 
-experimentoExitoso :: (Animal -> Animal) -> (Animal -> Bool) -> Animal -> Bool
-experimentoExitoso experimento criterio = criterio.experimento
+
+
+experimentoExitoso :: (Animal -> Animal) -> String -> Animal -> Bool
+experimentoExitoso experimento criterio = chequearCriterio criterio.experimento
+
+
+
+
+chequearCriterio :: String -> Animal -> Bool
+chequearCriterio criterio  = (elem criterio).capacidades
 
 experimento1 :: Animal -> Animal
 experimento1 = superpoderes.pinkificar.inteligenciaSuperior 10
