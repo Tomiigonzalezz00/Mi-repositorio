@@ -25,9 +25,9 @@ pinky = Animal {
 
 cerebro :: Animal
 cerebro = Animal {
-    iq = 100,
+    iq = 110,
     especie = Raton,
-    capacidades = ["destruir","crear","hablar"]
+    capacidades = ["destruir","crear","hacer asda","hacer hola","hacer pepe"]
 }
 
 elefante :: Animal
@@ -36,6 +36,15 @@ elefante = Animal {
     especie = Elefante,
     capacidades = ["beber" , "comer"]
 }
+
+raton :: Animal 
+raton = Animal {
+    iq = 17,
+    especie = Raton,
+    capacidades = ["destruenglonir el mundo","hacer planes desalmados"]
+
+}
+
 
 perro :: Animal
 perro = Animal {
@@ -78,9 +87,11 @@ cambiarEspecie animal
 
 --Ejercicio 3 
 
+antropomorfico :: Animal -> Bool
+antropomorfico animal = (tieneLaHabilidad "Hablar" animal) && (iq animal > 60 )
 
-anotropomorfico :: Animal -> Bool
-anotropomorfico animal = (tieneLaHabilidad "hablar" animal) && (iq animal > 60 )
+noTanCuerdo :: Animal -> Bool
+noTanCuerdo = (>= 3).length.(filter pinkiesco).capacidades
 
 tieneLaHabilidad :: String -> Animal -> Bool
 tieneLaHabilidad capacidad animal = elem capacidad (capacidades animal)
@@ -105,23 +116,15 @@ esPinkiesca :: [a] -> Bool
 esPinkiesca = (<= 4).length.sinHacer
 
 pinkiesco :: String -> Bool
-pinkiesco habilidad = empiezaConHacer habilidad && contieneVocal (sinHacer habilidad) && esPinkiesca habilidad
-
---Ejercicio 4 
+pinkiesco habilidad = empiezaConHacer habilidad && contieneVocal (sinHacer habilidad) && esPinkiesca habilidad 
 
 
+--Ejercicio 4
 
-experimentoExitoso :: (Animal -> Animal) -> String -> Animal -> Bool
-experimentoExitoso experimento criterio = chequearCriterio criterio.experimento
-
-
-
-
-chequearCriterio :: String -> Animal -> Bool
-chequearCriterio criterio  = (elem criterio).capacidades
+experimentoExitoso :: (Animal -> Animal) -> (Animal -> Bool) -> Animal -> Bool
+experimentoExitoso experimento criterio = criterio.experimento
 
 experimento1 :: Animal -> Animal
-experimento1 = superpoderes.pinkificar.inteligenciaSuperior 10
+experimento1 = superpoderes.inteligenciaSuperior 10.pinkificar
 
---experimentar :: Animal -> Animal
---experimentar experimento = experimento
+--Ejercicio 5 
