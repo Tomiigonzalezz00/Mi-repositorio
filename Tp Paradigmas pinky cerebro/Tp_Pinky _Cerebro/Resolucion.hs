@@ -18,16 +18,16 @@ data Especie = Elefante
 --Declaro algunos animales 
 pinky :: Animal
 pinky = Animal {
-    iq = 100,
+    iq = 60,
     especie = Raton,
-    capacidades = ["destruir","crear","hablar"]
+    capacidades = ["hablar" , "pensar"]
 }
 
 cerebro :: Animal
 cerebro = Animal {
-    iq = 60,
+    iq = 100,
     especie = Raton,
-    capacidades = ["hablar" , "pensar"]
+    capacidades = ["destruir","crear","hablar"]
 }
 
 elefante :: Animal
@@ -109,3 +109,11 @@ pinkiesco habilidad = empiezaConHacer habilidad && contieneVocal (sinHacer habil
 
 --Ejercicio 4 
 
+experimentoExitoso :: (Animal -> Animal) -> (Animal -> Bool) -> Animal -> Bool
+experimentoExitoso experimento criterio = criterio.experimento
+
+experimento1 :: Animal -> Animal
+experimento1 = superpoderes.pinkificar.inteligenciaSuperior 10
+
+--experimentar :: Animal -> Animal
+--experimentar experimento = experimento
