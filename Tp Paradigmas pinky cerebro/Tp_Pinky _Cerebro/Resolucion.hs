@@ -4,11 +4,15 @@
 {-# HLINT ignore "Redundant bracket" #-}
 {-# HLINT ignore "Use infix" #-}
 {-# HLINT ignore "Use elem" #-}
+{-# HLINT ignore "Eta reduce" #-}
+import Data.List 
+
 data Animal = Animal
     { iq :: Int,
       especie :: Especie,
       capacidades :: [String]
     } deriving(Show,Eq)
+
 
 data Especie = Elefante
     | Raton 
@@ -55,6 +59,7 @@ perro = Animal {
 
 --Ejercicio 2 
 
+
 inteligenciaSuperior :: Int-> Animal -> Animal
 inteligenciaSuperior incremento animal  = animal { iq = iq animal + incremento}
 
@@ -69,9 +74,9 @@ nuevoComienzo = darCapacidad.pinkificar.inteligenciaSuperior 20
 
 superpoderes :: Animal -> Animal
 superpoderes animal 
-    | (especie animal == Elefante) = animal{ capacidades = "No tiene miedo a ratones" : capacidades animal}
-    | (especie animal == Raton) && (iq animal > 100) = animal{ capacidades = "Hablar" : capacidades animal}
-    | razaPar animal = animal { capacidades = "Cazador de ratones" : capacidades animal}
+    | (especie animal == Elefante) = animal{ capacidades = "no tiene miedo a ratones" : capacidades animal}
+    | (especie animal == Raton) && (iq animal > 100) = animal{ capacidades = "hablar" : capacidades animal}
+    | razaPar animal = animal { capacidades = "cazador de ratones" : capacidades animal}
     | otherwise = animal
  
 razaPar :: Animal -> Bool
@@ -120,11 +125,46 @@ pinkiesco habilidad = empiezaConHacer habilidad && contieneVocal (sinHacer habil
 
 
 --Ejercicio 4
+data Experimento = UnExperimento {
+    transformacion1 :: Animal -> Animal,
+    transformacion2 :: Animal -> Animal,
+    transformacion3 :: Animal -> Animal,
+    criterio :: Animal -> Bool
+} 
 
-experimentoExitoso :: (Animal -> Animal) -> (Animal -> Bool) -> Animal -> Bool
-experimentoExitoso experimento criterio = criterio.experimento
 
-experimento1 :: Animal -> Animal
-experimento1 = superpoderes.inteligenciaSuperior 10.pinkificar
 
+
+experimentoExitoso experimento animal = (criterio experimento).aplicarExperimento animal
+
+
+experimento1 = UnExperimento {transformacion1 = pinkificar, transformacion2 = inteligenciaSuperior 10 , transformacion3 = superpoderes, criterio = antropomorfico }
+experimento2 = UnExperimento {transformacion1 = inteligenciaSuperior 20, transformacion2 = inteligenciaSuperior 10 , transformacion3 = superpoderes, criterio = noTanCuerdo }
+
+aplicarExperimento experimento = (transformacion3 experimento).(transformacion2 experimento).(transformacion1 experimento)
 --Ejercicio 5 
+
+
+listaA= [perro,cerebro] --listas de prueba
+
+listaC = ["ladrar","correr","crear","hablar","No tiene miedo a ratones","Cazador de ratones"] --lista de prueba
+
+
+tieneAlguna listaCapacidades animal  = not (null(intersect (capacidades animal) listaCapacidades)) -- Para saber si tiene alguna capacidad, hago la interseccion entre las capacidades del animal y las capacidades dadas
+listaConExperimento experimento = map (aplicarExperimento experimento) --Lista mapeada con el experimento aplicado 
+
+tieneCapacidad criterio listaAnimal listaCapacidades experimento  = filter (criterio listaCapacidades) (listaConExperimento experimento listaAnimal) --identifico que animales tienen esa capacidad
+
+reporte1 listaAnimales listaCapacidades experimento = map iq  (tieneCapacidad tieneAlguna listaAnimales listaCapacidades experimento ) --hago el primer reporte
+
+
+tieneTodas listaCapacidades animal = (intersect (capacidades animal) listaCapacidades) == listaCapacidades
+
+noTieneNinguna listaCapacidades animal = (intersect (capacidades animal) listaCapacidades) == []
+
+reporte2 listaAnimales listaCapacidades experimento = map especie (tieneCapacidad tieneTodas listaAnimales listaCapacidades experimento)
+
+
+reporte3 listaAnimales listaCapacidades experimento = map (length.capacidades) (tieneCapacidad noTieneNinguna listaAnimales listaCapacidades experimento)
+
+-- Ejercicio 6
