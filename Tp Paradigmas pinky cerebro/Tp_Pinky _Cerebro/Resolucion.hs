@@ -168,3 +168,20 @@ reporte2 listaAnimales listaCapacidades experimento = map especie (tieneCapacida
 reporte3 listaAnimales listaCapacidades experimento = map (length.capacidades) (tieneCapacidad noTieneNinguna listaAnimales listaCapacidades experimento)
 
 -- Ejercicio 6
+
+ratonRaro = Animal {
+    iq = 100,
+    especie = Raton,
+    capacidades = repeat "capacidad"
+    }
+
+-- Se podrian relizar los experimentos que primero Pinkifiquen al animal, ya uqe borraria su lista infinita de capacidades, en los demas experimentos, no se lo podria usar ya que tendria un bucle infinito en las capacidades
+
+
+--Ejercicio 7 
+abecedario = subsequences ['a'..'z']
+generateWordsUpTo largo = filter ((<= largo).length) (abecedario)
+
+generateWords largo = filter ((== largo).length) (abecedario)
+
+pinkiescasPosibles largo criterio = filter (contieneVocal) (criterio largo)
