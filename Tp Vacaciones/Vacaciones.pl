@@ -87,7 +87,7 @@ capacidad(Ciudad,Categoria,Capacidad):-
 mayorCategoriaDeAlojamiento(Ciudad,Categoria):-
         alojamiento(Ciudad,Categoria,_),
         capacidad(Ciudad,Y,CapacidadAlojamiento),
-        forall(capacidad(Ciudad,X,CapacidadAlojamiento1),CapacidadAlojamiento1 >= CapacidadAlojamiento).
+        forall(capacidad(Ciudad,X,CapacidadAlojamiento1),CapacidadAlojamiento >= CapacidadAlojamiento1).
 
 /*C) mayorCiudadCon/2 Relaciona cada  categoria de alojamiento con la ciudad que mas lugares dispone de dicha categoría. */
 
