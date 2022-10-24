@@ -66,9 +66,9 @@ tieneMasDeUnaCiudad(Provincia):-
         mismoSiglo(Anio1,Anio2).
 
 %B)
-algunaCiudadNoDisponeDeAlojamiento(Provincia):-
-        ciudad(Ciudad,_,Provincia),
-        not(alojamiento(Ciudad,_,_)). 
+algunaCiudadNoDisponeDeAlojamiento(Provincia):- %le paso como parametro una provincia
+        ciudad(Ciudad,_,Provincia), %todas las ciudades que pertenezcan a esa provincia
+        not(alojamiento(Ciudad,_,_)). %evaluo si NO tienen un alojamiento. la parte (alojamiento(ciudad,_,_) me da las ciudades que si  tienen, y al negarla con el not, las que no) 
 
 %C) 
 unicaCategoriaDeAlojamiento(Ciudad):-
