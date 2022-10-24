@@ -12,7 +12,7 @@ ciudad(mdq, 1876, bsas).
 ciudad(bariloche, 1880, rionegro).
 ciudad(viedma, 1776, rionegro).
 ciudad(calafate, 1930, stacruz).
-ciudad(garin, 1958, bsas).
+ciudad(carlosPaz, 1958, cordoba).
 ciudad(lanus, 1888, bsas).
 
 
@@ -27,7 +27,9 @@ alojamiento(mdq, residencial, 5).
 alojamiento(mdq, hosteria, 5).
 alojamiento(viedma, camping, 3).
 alojamiento(calafate, camping, 2).
-alojamiento(calafate, hosteria, 3).
+alojamiento(calafate, hosteria, 3). 
+alojamiento(carlosPaz, camping, 2).
+alojamiento(carlosPaz, hotel, 8).
 
 %Capacidad promedio de cada categoria de alojamiento
 capacidad(hotel, 50).
@@ -58,7 +60,6 @@ coeficiente(2008, 1.5).
 mismoSiglo(Anio1,Anio2) :- Anio1//100 =:= Anio2//100.
 
 tieneMasDeUnaCiudad(Provincia):- 
-        provincia(Provincia),
         ciudad(X,Anio1,Provincia),
         ciudad(Y,Anio2,Provincia),
         X \= Y,
@@ -66,20 +67,71 @@ tieneMasDeUnaCiudad(Provincia):-
 
 %B)
 algunaCiudadNoDisponeDeAlojamiento(Provincia):-
-        provincia(Provincia),
         ciudad(Ciudad,_,Provincia),
         not(alojamiento(Ciudad,_,_)). 
 
 %C) 
 unicaCategoriaDeAlojamiento(Ciudad):-
         alojamiento(Ciudad,Categoria1,_),
-        forall(alojamiento (Ciudad,Categoria2,_), Categoria1 == Categoria2). 
+        forall(alojamiento(Ciudad,Categoria2,_), Categoria1 == Categoria2). 
 
 %2) 
 %A) 
-/*capacidad/3 La cantidad de lugares disponibles de una ciudad según el tipo de alojamiento
-capacidad(calafate , camping, Capacidad)
-Capacidad = 200
-(100 por cada uno de los 2 campings)*/
 capacidad(Ciudad,Alojamiento,Capacidad):- 
-  
+        ciudad(Ciudad,_,_),
+        alojamiento(Ciudad,Categoria,Cantidad),
+        capacidad(Alojamiento,CapacidadAlojamiento),
+        Capacidad is (Cantidad*CapacidadAlojamiento).
+
+%B) mayorCategoriaDeAlojamiento/2 Relaciona cada  ciudad, con la categoria de alojamiento que más lugares dispone
+mayorCategoriaDeAlojamiento(Ciudad,Categoria):-
+        alojamiento(Ciudad,Categoria,_),
+        capacidad(Ciudad,Y,CapacidadAlojamiento),
+        forall(capacidad(Ciudad,X,CapacidadAlojamiento1),CapacidadAlojamiento1 >= CapacidadAlojamiento).
+
+/*C) mayorCiudadCon/2 Relaciona cada  categoria de alojamiento con la ciudad que mas lugares dispone de dicha categoría. */
+
+mayorCiudadCon(Ciudad,Categoria):-
+        alojamiento(Ciudad,Categoria,Cantidad),
+        forall(alojamiento(X,Categoria,Cantidad1), Cantidad >= Cantidad1).
+
+%3) 
+/*La Secretaría de turismo implementa un sistema de subsidios para fomentar la actividad, por el que por mes(?) transfiere fondos a las ciudades. El monto a transferir equivale a un monto fijo (que actualmente es de $10) por cada lugar disponible, por un coeficiente que depende de la provincia que sea: Para las provincias patagónicas el coeficiente depende del año de incorporación al sistema de subsidios, para los provincias grandes se sabe el coeficiente que le corresponde a cada una y para las provincias comunes, el coeficiente es para todos el mismo. Se desea saber cuántos fondos le corresponden a cada ciudad por cada categoría de alojamiento.
+se sabe que
+
+provinciaGrande(bsas,0.9).
+provinciaPatagonica(rionegro,2010).
+provinciaPatagonica(stacruz,2003).
+
+provinciaComun(cordoba).
+
+montoPorLugar(10).
+
+coeficiente(comun, 1.1).
+coeficiente(2010, 1.2).
+coeficiente(2009, 1.4).
+coeficiente(2008, 1.5).*/
+
+fondoCorrespondiente(Ciudad,Categoria,Fondos) :- 
+        ciudad(Ciudad,_,Provincia),
+        alojamiento(Ciudad,Categoria,_),
+        provinciaGrande(Provincia,Coeficiente),
+        capacidad(Ciudad,Categoria,CapacidadAlojamiento),
+        Fondos is (CapacidadAlojamiento*10*Coeficiente).
+
+fondoCorrespondiente(Ciudad,Categoria,Fondos) :- 
+        ciudad(Ciudad,_,Provincia),
+        alojamiento(Ciudad,Categoria,_),
+        provinciaPatagonica(Provincia,Anio),
+        coeficiente(Anio,Coeficiente),
+        capacidad(Ciudad,Categoria,CapacidadAlojamiento),
+        Fondos is (CapacidadAlojamiento*10*Coeficiente).
+
+fondoCorrespondiente(Ciudad,Categoria,Fondos) :- 
+        ciudad(Ciudad,_,Provincia),
+        alojamiento(Ciudad,Categoria,_),
+        provinciaComun(Provincia),
+        coeficiente(_,Coeficiente),
+        capacidad(Ciudad,Categoria,CapacidadAlojamiento),
+        Fondos is (CapacidadAlojamiento*10*Coeficiente).
+
