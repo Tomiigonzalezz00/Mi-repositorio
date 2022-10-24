@@ -77,10 +77,10 @@ unicaCategoriaDeAlojamiento(Ciudad):-
 
 %2) 
 %A) 
-capacidad(Ciudad,Alojamiento,Capacidad):- 
+capacidad(Ciudad,Categoria,Capacidad):- 
         ciudad(Ciudad,_,_),
         alojamiento(Ciudad,Categoria,Cantidad),
-        capacidad(Alojamiento,CapacidadAlojamiento),
+        capacidad(Categoria,CapacidadAlojamiento),
         Capacidad is (Cantidad*CapacidadAlojamiento).
 
 %B) mayorCategoriaDeAlojamiento/2 Relaciona cada  ciudad, con la categoria de alojamiento que más lugares dispone
