@@ -12,19 +12,22 @@ ciudad(mdq, 1876, bsas).
 ciudad(bariloche, 1880, rionegro).
 ciudad(viedma, 1776, rionegro).
 ciudad(calafate, 1930, stacruz).
+ciudad(garin, 1958, bsas).
 ciudad(lanus, 1888, bsas).
 
+
+
 %alojamiento(ciudad, alojamiento, cantidad).
-alojamento(bariloche, camping, 2).
-alojamento(bariloche, hotel, 12).
-alojamento(bariloche, hosteria, 5).
-alojamento(mdq, hotel, 100).
-alojamento(mdq, camping, 10).
-alojamento(mdq, residencial, 5).
-alojamento(mdq, hosteria, 5).
-alojamento(viedma, camping, 3).
-alojamento(calafate, camping, 2).
-alojamento(calafate, hosteria, 3).
+alojamiento(bariloche, camping, 2).
+alojamiento(bariloche, hotel, 12).
+alojamiento(bariloche, hosteria, 5).
+alojamiento(mdq, hotel, 100).
+alojamiento(mdq, camping, 10).
+alojamiento(mdq, residencial, 5).
+alojamiento(mdq, hosteria, 5).
+alojamiento(viedma, camping, 3).
+alojamiento(calafate, camping, 2).
+alojamiento(calafate, hosteria, 3).
 
 %Capacidad promedio de cada categoria de alojamiento
 capacidad(hotel, 50).
@@ -52,12 +55,24 @@ coeficiente(2008, 1.5).
 %1)Realizar predicados que resuelvan lo siguiente y justificar si son inversibles o no. Mostrar ejemplos de consulta.
 %A)
 
-mismoSiglo(Anio1,Anio2) :- Anio1//100 =:= Anio2//100
+mismoSiglo(Anio1,Anio2) :- Anio1//100 =:= Anio2//100.
 
 tieneMasDeUnaCiudad(Provincia):- 
-        provincia(Provincia).
-        %ciudad(X,Anio1,Provincia),
-        %ciudad(Y,Anio2,Provincia),
-        %X \= Y,
-        %mismoSiglo(Anio1,Anio2).
+        provincia(Provincia),
+        ciudad(X,Anio1,Provincia),
+        ciudad(Y,Anio2,Provincia),
+        X \= Y,
+        mismoSiglo(Anio1,Anio2).
 
+%B)
+algunaCiudadNoDisponeDeAlojamiento(Provincia):-
+        provincia(Provincia),
+        ciudad(Ciudad,_,Provincia),
+        not(alojamiento(Ciudad,_,_)). 
+
+%C) 
+unicaCategoriaDeAlojamiento(Ciudad):-
+        alojamiento(Ciudad,Categoria1,_),
+        forall(alojamiento (Ciudad,Categoria2,_), Categoria1 == Categoria2). 
+
+%2) 
