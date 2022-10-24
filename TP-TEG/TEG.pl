@@ -1,3 +1,4 @@
+%-------------------------------BASE DE DATOS-----------------------------------------------------------------------------
 continente(americaDelSur).
 continente(americaDelNorte).
 continente(asia).
@@ -68,7 +69,7 @@ limitrofes(australia,java).
 limitrofes(australia,borneo).
 limitrofes(australia,chile).
 
-%termina base de datos
+%------------------------------------------------------TERMINA BASE DE DATOS-----------------------------------------------
 %1
 puedenAtacarse(Jugador1,Jugador2):-
   ocupa(Pais1,Jugador1,_),
