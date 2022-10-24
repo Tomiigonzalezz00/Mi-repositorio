@@ -76,3 +76,10 @@ unicaCategoriaDeAlojamiento(Ciudad):-
         forall(alojamiento (Ciudad,Categoria2,_), Categoria1 == Categoria2). 
 
 %2) 
+%A) 
+/*capacidad/3 La cantidad de lugares disponibles de una ciudad según el tipo de alojamiento
+capacidad(calafate , camping, Capacidad)
+Capacidad = 200
+(100 por cada uno de los 2 campings)*/
+capacidad(Ciudad,Alojamiento,Capacidad):- 
+  
