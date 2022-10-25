@@ -185,3 +185,7 @@ generateWordsUpTo largo = filter ((<= largo).length) (abecedario)
 generateWords largo = filter ((== largo).length) (abecedario)
 
 pinkiescasPosibles largo criterio = filter (contieneVocal) (criterio largo)
+
+
+
+
