@@ -1,0 +1,50 @@
+Se necesita desarrollar un sistema en Haskell que permita administrar transacciones financieras y comerciales internacionales.
+Existen personas que cuentan entre sus ahorros sumas de dinero en diferentes monedas. Además se conoce su nivel de satisfacción. Por ejemplo:
+
+cacho = UnaPersona "pedro" [(100, "peso"), (400, "real"), (1, "dolar")] 4
+tita = UnaPersona "juana" [(1000, "euro"), ((-5), "peso")] 2
+
+Los productos que se comercializan, se representan con el siguiente tipo de dato:
+data Producto = UnProducto {descripcion::String, precio::Float, moneda::String}  
+
+También se conocen las cotizaciones de las monedas
+cotizaciones :: [(Float,String)]
+cotizaciones = [(1, "peso"), (9, "dolar"), (4, "real"), (8,"euro")]
+
+
+1) Para entrar en calor
+Hacer las funciones que permitan realizar lo siguiente
+a. Obtener el tipo de cambio de una moneda
+	>tipoCambio "dolar"
+	9
+
+b.Convertir un cierto importe, de una moneda a otra 
+	>convertirA "real" (8, "dolar")
+	18
+
+c. Obtener la cantidad de dinero que tiene una persona en una moneda dada
+	>cantidadDe "real" cacho
+	400
+
+d.Calcular el total de ahorro de una persona, expresado en pesos.
+	>totalAhorro cacho
+	1709 
+ (100*1  + 400*4 + 1 * 9)
+
+Importante: Utilizar, al menos una vez, la función composición y una expresión lambda
+
+2) Transacciones
+   Una persona puede realizar diferentes transacciones comerciales. En todos los casos se quiere saber cómo queda la persona luego de la transacción. Las transacciones siempre se pueden realizar, si no se tiene dinero suficiente en la moneda indicada, se registra como una deuda, con un importe negativo. Definir las funciones que permitan representar cada transacción. 
+        ·Comprar: La persona adquiere un producto, por lo que se descuenta de sus ahorros el precio del producto, en la  moneda en que está expresado. 
+        ·Vender: La persona vende un producto y recibe el importe correspondiente  a su precio, y lo registra prolijamente acumulándolo según la moneda. 
+        Nota para todo el examen pero en particular para este punto: evitar repetir lógica
+
+3) Estilos de consumo
+Se quiere representar diferentes estilos que las personas despliegan cuando van a ciertos negocios.
+El negocio cuenta con una dirección, una lista de productos y un estilo. Los estilos son:
+    ·compulsivo: El cliente compra todos los productos. 
+    ·impulsivo: El cliente compra sólo el primer producto.
+    ·selectivo: El cliente compra los que tienen precio en pesos. 
+a. Hacer una función por la que cuando un cliente va a un negocio, se comporte según el estilo correspondiente y su   nivel de satisfacción aumente en una unidad.
+b. Incorporar un nuevo estilo, denominado exclusivo, por el que el cliente compra el más caro. Realizarlo utilizando la función maximum y definiendo adecuadamente el tipo de dato del producto a comprar.
+c. Que pasa si la lista de productos es infinita. Mostrar ejemplos donde sucedan diferentes cosas.
