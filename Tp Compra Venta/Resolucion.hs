@@ -1,3 +1,4 @@
+import Data.ByteString (elemIndex)
 data Persona = UnaPersona {
     nombre :: String,
     cuenta:: [(Float,String)],
@@ -23,23 +24,36 @@ tita = UnaPersona{
     nivelDeSatisfaccion= 2
     }
 
+    
+importe = fst 
+nombreM = snd
+
+
+
 
 cotizaciones :: [(Float,String)]
 cotizaciones = [(1, "peso"), (9, "dolar"), (4, "real"), (8,"euro")]
 
 --1) 
 --a)
-tipoCambio moneda = map (fst) (filter ((moneda==).snd) cotizaciones) !!0
+tipoCambio moneda = (fst.head.filter ((moneda==).snd)) cotizaciones
 
 --b) 
 convertirA :: String -> (Float, String) -> Float
-convertirA obtengo recibo = fst recibo * tipoCambio obtengo 
+convertirA obtengo (importe,tengo) = importe * tipoCambio tengo / tipoCambio obtengo 
 
 --c) 
-cantidadDe moneda persona =  map (fst) (filter ((moneda==).snd) (cuenta persona))
+tieneMoneda :: String -> Persona -> [(Int,String)] -> Bool
+tieneMoneda moneda persona = any ((moneda==).nombreM) cuenta persona
+
+
+cantidadDe moneda persona
+    | tieneMoneda moneda (cuenta persona) =  importe.head.filter ((moneda==).nombreM)
+    | otherwise = 0
+
 
 --d) 
 pasarAPeso = convertirA "peso" 
-totalAhorro persona = map (pasarAPeso) (cuenta persona)
+totalAhorro persona = sum (map (pasarAPeso) (cuenta persona))
 
 --Ejercicio 2 
