@@ -66,9 +66,9 @@ tieneMasDeUnaCiudad(Provincia):-
         mismoSiglo(Anio1,Anio2).
 
 %B)
-algunaCiudadNoDisponeDeAlojamiento(Provincia):-
-        ciudad(Ciudad,_,Provincia),
-        not(alojamiento(Ciudad,_,_)). 
+algunaCiudadNoDisponeDeAlojamiento(Provincia):- %le paso como parametro una provincia
+        ciudad(Ciudad,_,Provincia), %todas las ciudades que pertenezcan a esa provincia
+        not(alojamiento(Ciudad,_,_)). %evaluo si NO tienen un alojamiento. la parte (alojamiento(ciudad,_,_) me da las ciudades que si  tienen, y al negarla con el not, las que no) 
 
 %C) 
 unicaCategoriaDeAlojamiento(Ciudad):-
@@ -77,17 +77,17 @@ unicaCategoriaDeAlojamiento(Ciudad):-
 
 %2) 
 %A) 
-capacidad(Ciudad,Alojamiento,Capacidad):- 
+capacidad(Ciudad,Categoria,Capacidad):- 
         ciudad(Ciudad,_,_),
         alojamiento(Ciudad,Categoria,Cantidad),
-        capacidad(Alojamiento,CapacidadAlojamiento),
+        capacidad(Categoria,CapacidadAlojamiento),
         Capacidad is (Cantidad*CapacidadAlojamiento).
 
 %B) mayorCategoriaDeAlojamiento/2 Relaciona cada  ciudad, con la categoria de alojamiento que más lugares dispone
 mayorCategoriaDeAlojamiento(Ciudad,Categoria):-
         alojamiento(Ciudad,Categoria,_),
         capacidad(Ciudad,Y,CapacidadAlojamiento),
-        forall(capacidad(Ciudad,X,CapacidadAlojamiento1),CapacidadAlojamiento1 >= CapacidadAlojamiento).
+        forall(capacidad(Ciudad,X,CapacidadAlojamiento1),CapacidadAlojamiento >= CapacidadAlojamiento1).
 
 /*C) mayorCiudadCon/2 Relaciona cada  categoria de alojamiento con la ciudad que mas lugares dispone de dicha categoría. */
 
