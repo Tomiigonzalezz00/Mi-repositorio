@@ -1,4 +1,4 @@
-import Data.List(nub, intersect, union, sort, group, sortBy)
+import Data.List(nub, intersect, union, sort, group, sortBy,subsequences)
 import Data.Char(toUpper)
 
 data Biblioteca = UnaBiblioteca {
@@ -134,15 +134,26 @@ caracteres_validos2 = ["a", "b","c", "d", "e", "f", "g", "h"]
 generarLibro texto = UnLibro{generos = [],texto = texto, cantPaginas = 410, titulo = "Babel" }
 
 
+---------------- BIBLIOTECA DE BABEL ----------
+
+-- lista caracteres validos para generar textos "pseudoaleatoria"
+
+todos_los_textos = subsequences ['a'..'z']
+
+--generarLibro texto = UnLibro{generos = [],texto = texto, cantPaginas = 410, titulo = "Babel" }
+longMenor y= length y > 0
+generarTexto n = (filter (longMenor) todos_los_textos) !! n
+
+--generarLibrosAleatorios 0 n = [UnLibro { titulo = "Libro",texto = generarTexto n,generos = [""],cantPaginas = 410}]
+generarLibrosAleatorios n =  UnLibro { titulo = "Libro",texto = generarTexto n,generos = [""],cantPaginas = 410}:(generarLibrosAleatorios (n+5))
+
 bibliotecaBabel = UnaBiblioteca {
-    libros = [],
+    libros = generarLibrosAleatorios 1,
     ubicacion = "Babel"
 }
 
+comienzaCon fragmento libro = take (length fragmento) (texto libro) == fragmento
 
+primerLibroQueContiene fragmento = head (filter (comienzaCon fragmento) (libros bibliotecaBabel))
 
-
-
--- Evaluación diferida: propone que una expresión no es evaluada hasta que es necesario evaluarla para utilizar su información, ejemplos
--- si tenemos [1..] lista infinita de numeros naturales, podemos dejarla "quieta" sin llmarla y no va a haber problema
--- en cambio, cuando la llamemos se ejecutará , o sea va a ser "llamada" y va a imprimir los infinitos numeros.
+cuantosTienenFragmento fragmento libros = filter (comienzaCon fragmento) (libros bibliotecaBabel)
