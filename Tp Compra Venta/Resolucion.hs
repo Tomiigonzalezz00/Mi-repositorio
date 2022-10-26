@@ -36,19 +36,21 @@ cotizaciones = [(1, "peso"), (9, "dolar"), (4, "real"), (8,"euro")]
 
 --1) 
 --a)
-tipoCambio moneda = (fst.head.filter ((moneda==).snd)) cotizaciones
+tipoCambio moneda = (fst.head.filter ((moneda==).nombreM)) cotizaciones
 
 --b) 
 convertirA :: String -> (Float, String) -> Float
 convertirA obtengo (importe,tengo) = importe * tipoCambio tengo / tipoCambio obtengo 
 
 --c) 
-tieneMoneda :: String -> Persona -> [(Int,String)] -> Bool
-tieneMoneda moneda persona = any ((moneda==).nombreM) cuenta persona
+
+tieneMoneda moneda persona = any ((moneda==).nombreM) (cuenta persona)
 
 
+
+cantidadDe :: String -> Persona -> [(Float, String)]
 cantidadDe moneda persona
-    | tieneMoneda moneda (cuenta persona) =  importe.head.filter ((moneda==).nombreM)
+    | tieneMoneda moneda persona = filter ((moneda==).nombreM) (cuenta persona)
     | otherwise = 0
 
 
