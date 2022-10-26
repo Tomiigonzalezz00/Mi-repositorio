@@ -3,7 +3,7 @@ import Data.ByteString (elemIndex)
 type Dinero = (Float,String)
 type Moneda = String 
 type Importe = Float
-
+type Estilo = String
 data Persona = UnaPersona {
     nombre :: String,
     cuenta:: [Dinero],
@@ -15,6 +15,15 @@ descripcion::String,
 precio::Importe, 
 moneda::Moneda
 } deriving (Show,Eq)  
+
+data Negocio = UnNegocio {
+direccion::String, 
+productos::[Producto], 
+estilo::Estilo
+} deriving (Show,Eq)  
+
+
+
 
 cacho:: Persona
 cacho = UnaPersona {
@@ -82,19 +91,64 @@ gaseosa = UnProducto {
     moneda = "dolar"
 }  
 
+libro  = UnProducto {
+    descripcion = "dracula",
+    precio = 15,
+    moneda = "dolar"
+}  
+libro2  = UnProducto {
+    descripcion = "1984",
+    precio = 15,
+    moneda = "dolar"
+}  
+
+celular = UnProducto {
+    descripcion = "samsuns",
+    precio = 300000,
+    moneda = "pesos"
+}  
+
+celular2 = UnProducto {
+    descripcion = "iphone",
+    precio = 300000,
+    moneda = "pesos"
+}  
+
+
 
 valorProducto = precio
 
 
-descuentoValorDelProducto producto (importe,moneda)= (importe - precio producto, moneda)
+comprar producto (importe,moneda)= (importe - precio producto, moneda)
 
-sumaValorDelProducto producto (importe,moneda)= (importe + precio producto, moneda)
+vender producto (importe,moneda)= (importe + precio producto, moneda)
 
 tieneDivisaDeProducto producto persona = head (filter ((moneda producto==).nombreM) (cuenta persona))
 
 cantidadMoneda divisa = importe.head.filter (\moneda -> nombreM moneda == divisa)
 
 
-comprar producto persona = persona {cuenta = delete (cantidadMoneda (moneda producto) (cuenta persona),moneda producto) (cuenta persona ++ map (descuentoValorDelProducto producto) (filter ((moneda producto==).nombreM) (cuenta persona)))}
 
-vender producto persona = persona {cuenta = delete (cantidadMoneda (moneda producto) (cuenta persona),moneda producto) (cuenta persona ++ map (sumaValorDelProducto producto) (filter ((moneda producto==).nombreM) (cuenta persona)))}
+transaccion operacion producto persona = persona {cuenta = delete (cantidadMoneda (moneda producto) (cuenta persona),moneda producto) (cuenta persona ++ map (operacion producto) (filter ((moneda producto==).nombreM) (cuenta persona)))}
+
+
+--Ejercicio 3) 
+kioco = UnNegocio {
+    direccion = "calle falsa 123", 
+    productos = [gaseosa,alfajor], 
+    estilo = "Compulsivo" 
+}
+
+ateneo = UnNegocio {
+    direccion = "calle loca 123", 
+    productos = [libro,libro2], 
+    estilo = "Impulsivo" 
+}
+
+musimundo = UnNegocio {
+    direccion = "calle 123", 
+    productos = [celular,celular2], 
+    estilo = "Selectivo" 
+}
+
+entrarEn negocio cliente = 
