@@ -76,11 +76,19 @@ alfajor = UnProducto {
     moneda = "real"
 }  
 
+gaseosa = UnProducto {
+    descripcion = "refrescante",
+    precio = 15,
+    moneda = "dolar"
+}  
+
+
 valorProducto = precio
 
 
 descuentoValorDelProducto producto (importe,moneda)= (importe - precio producto, moneda)
 
+sumaValorDelProducto producto (importe,moneda)= (importe + precio producto, moneda)
 
 tieneDivisaDeProducto producto persona = head (filter ((moneda producto==).nombreM) (cuenta persona))
 
@@ -89,3 +97,4 @@ cantidadMoneda divisa = importe.head.filter (\moneda -> nombreM moneda == divisa
 
 comprar producto persona = persona {cuenta = delete (cantidadMoneda (moneda producto) (cuenta persona),moneda producto) (cuenta persona ++ map (descuentoValorDelProducto producto) (filter ((moneda producto==).nombreM) (cuenta persona)))}
 
+vender producto persona = persona {cuenta = delete (cantidadMoneda (moneda producto) (cuenta persona),moneda producto) (cuenta persona ++ map (sumaValorDelProducto producto) (filter ((moneda producto==).nombreM) (cuenta persona)))}
