@@ -126,7 +126,7 @@ transaccion operacion producto persona = persona {cuenta = delete (cantidadMoned
 
 
 --Ejercicio 3) NO ANDA
-
+{-
 
 type Estilo = [Producto] -> [Producto]
 
@@ -177,4 +177,4 @@ instance Ord Producto where
 
 
 exclusivo :: Estilo
-exclusivo productos = [maximum productos]
+exclusivo productos = [maximum productos] -}
