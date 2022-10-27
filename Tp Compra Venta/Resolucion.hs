@@ -3,7 +3,7 @@ import Data.ByteString (elemIndex)
 type Dinero = (Float,String)
 type Moneda = String 
 type Importe = Float
-type Estilo = String
+
 data Persona = UnaPersona {
     nombre :: String,
     cuenta:: [Dinero],
@@ -15,13 +15,6 @@ descripcion::String,
 precio::Importe, 
 moneda::Moneda
 } deriving (Show,Eq)  
-
-data Negocio = UnNegocio {
-direccion::String, 
-productos::[Producto], 
-estilo::Estilo
-} deriving (Show,Eq)  
-
 
 
 
@@ -132,23 +125,56 @@ cantidadMoneda divisa = importe.head.filter (\moneda -> nombreM moneda == divisa
 transaccion operacion producto persona = persona {cuenta = delete (cantidadMoneda (moneda producto) (cuenta persona),moneda producto) (cuenta persona ++ map (operacion producto) (filter ((moneda producto==).nombreM) (cuenta persona)))}
 
 
---Ejercicio 3) 
-kioco = UnNegocio {
-    direccion = "calle falsa 123", 
-    productos = [gaseosa,alfajor], 
-    estilo = "Compulsivo" 
+--Ejercicio 3) NO ANDA
+
+
+type Estilo = [Producto] -> [Producto]
+
+data Negocio = UnNegocio {
+    direccion :: String,
+    listaProductos :: [Producto],
+    estilo :: Estilo
 }
 
-ateneo = UnNegocio {
-    direccion = "calle loca 123", 
-    productos = [libro,libro2], 
-    estilo = "Impulsivo" 
+banco :: Negocio
+banco = UnNegocio {
+    direccion ="Medrano 900",
+    listaProductos = [bici,libro],
+    estilo = compulsivo
 }
 
-musimundo = UnNegocio {
-    direccion = "calle 123", 
-    productos = [celular,celular2], 
-    estilo = "Selectivo" 
+joya :: Negocio
+joya = UnNegocio {
+    direccion = "Rivadavia 4000",
+    listaProductos = [bici,libro],
+    estilo = exclusivo
 }
 
-entrarEn negocio cliente = 
+-- A)
+
+compulsivo :: Estilo
+compulsivo productos = productos
+
+impulsivo :: Estilo
+impulsivo productos = [head productos]
+
+selectivo :: Estilo
+selectivo productos = filter (("peso"==).moneda) productos
+
+irA negocio persona = (aumentarSatisfaccion.comprarSegunEstilo negocio) persona
+
+comprarSegunEstilo (UnNegocio _ productos estilo) persona = foldl transaccion comprar (estilo productos) persona
+
+
+aumentarSatisfaccion :: Persona -> Persona
+aumentarSatisfaccion (UnaPersona nombre ahorros nivelSatisfaccion) = UnaPersona nombre ahorros (nivelSatisfaccion + 1)
+
+--B)Incorporar un nuevo estilo, denominado exclusivo, por el que el cliente compra el más caro. Realizarlo utilizando la función maximum y definiendo adecuadamente el tipo de dato del producto a comprar.
+
+
+instance Ord Producto where
+    (<=) (UnProducto _ precio1 moneda1) (UnProducto _ precio2 moneda2) = precio1*tipoCambio moneda1 <= precio2*tipoCambio moneda2
+
+
+exclusivo :: Estilo
+exclusivo productos = [maximum productos]
