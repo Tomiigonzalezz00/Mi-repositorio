@@ -61,11 +61,11 @@ calculaAhorro persona = (sum.map (convertirA "peso").ahorros) persona
 alfajor = UnProducto {
     descripcion = "poderoso el chiquitin",
     precio = 10,
-    moneda = "dolar"
+    moneda = "real"
 }  
 gaseosa = UnProducto {
     descripcion = "refrescante",
-    precio = 10,
+    precio = 15,
     moneda = "dolar"
 }
 --Comprar: La persona adquiere un producto, por lo que se descuenta de sus ahorros el precio del producto, en la moneda en que está expresado. 
