@@ -3,7 +3,8 @@
 }
 html{
     font-size: 24px; /*Tamaño fuente de todo la pagina*/
-    background-color: grey;/*Color de toda la pagina*/
+    /*background-color: grey;/*Color de toda la pagina*/
+    background-image: url("../Imagenes/fondo.jpg");/*Imagen de fondo de la pagina*/
 }
 
 
