@@ -12,7 +12,7 @@ T= 4*pi
 Wo = 2*pi*(1/T) 
 #Numero maximo de coeficientes
 maxcoeficientes= 5
-#Ejes
+#Variables 
 t = np.arange(-T/2,T/2,0.001)
 
 #Listas con coeficientes
@@ -20,39 +20,26 @@ An = []
 Bn = []
 
 #Lista de funciones
-def funcion1():
-    t = np.arange(-T/2,T/2,0.001)
-    return seno(t)
-    
-def funcion2():
-    print("Opción 2")
-
-def funcion3():
-    print("Opción 3")
-
-def funcion4():
-    print("Opción 3")
-
-# Crear el diccionario
-switch = {
-    1: funcion1(),
-    2: funcion2(),
-    3: funcion3(),
-    4: funcion4()
-}
-
-# Definir la variable para la opción
 funcion_elegida = 1
 
-# Llamar a la función correspondiente a la opción
-switch[funcion_elegida]()
+def funcion_1(t):
+    return seno(t)
 
+
+def seleccionar_funcion(funcion_elegida,t):
+    switcher = {
+        1: funcion_1(t)
+    }
+    # obtener la función correspondiente a la opción seleccionada
+    funcion = switcher.get(funcion_elegida, lambda: "Opción inválida")
+    # llamar a la función correspondiente
+    return funcion()
 
 def funcion(t):
-    return switch[funcion_elegida]()
+    return seleccionar_funcion(funcion_elegida,t)
 
 #Componente continua
-An.append((1/T)*quad(funcion,-T/2,T/2)[0]) #Calculo de A0, fuera del calculo principal de coeficientes
+An.append((1/T)*quad(funcion(t),-T/2,T/2)[0]) #Calculo de A0, fuera del calculo principal de coeficientes
 Bn.append(0) #Se agrega un cero en la primer posicion para que en el calculo principal de los coeficientes, ambos empiecen cargando los valores desde la posicion "1"
 
     
