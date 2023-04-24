@@ -12,15 +12,44 @@ T= 4*pi
 Wo = 2*pi*(1/T) 
 #Numero maximo de coeficientes
 maxcoeficientes= 5
-#Variables 
+#Ejes
 t = np.arange(-T/2,T/2,0.001)
 
 #Listas con coeficientes
 An = []
 Bn = []
 
+#Lista de funciones
+def funcion1():
+    t = np.arange(-T/2,T/2,0.001)
+    return seno(t)
+    
+def funcion2():
+    print("Opción 2")
+
+def funcion3():
+    print("Opción 3")
+
+def funcion4():
+    print("Opción 3")
+
+# Crear el diccionario
+switch = {
+    1: funcion1(),
+    2: funcion2(),
+    3: funcion3(),
+    4: funcion4()
+}
+
+# Definir la variable para la opción
+funcion_elegida = 1
+
+# Llamar a la función correspondiente a la opción
+switch[funcion_elegida]()
+
+
 def funcion(t):
-    return seno(t)*t
+    return switch[funcion_elegida]()
 
 #Componente continua
 An.append((1/T)*quad(funcion,-T/2,T/2)[0]) #Calculo de A0, fuera del calculo principal de coeficientes
