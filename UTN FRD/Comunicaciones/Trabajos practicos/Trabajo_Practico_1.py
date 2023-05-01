@@ -19,8 +19,21 @@ t = np.arange(0,T,0.001)
 An = []
 Bn = []
 
-def funcion(t):
-    return np.sin(t)
+
+def funcion_1(t):
+    Amplitud = 1
+    return np.piecewise(t,[abs(t)<1/2,abs(t)>1/2],[lambda t: Amplitud ,lambda t: 0])
+
+def funcion_2(t):
+    return
+
+def funcion_3(t):
+    return
+
+def funcion_4(t):
+    return 
+
+def funcion(t) : funcion_1(t)
 
 #Componente continua
 An.append((1/T)*quad(funcion,-T/2,T/2)[0])
