@@ -71,3 +71,4 @@ coeficientes(funcion_1(t))
 plt.plot(t,fourierTrigonometrica(funcion_1(t)))
 plt.plot(t,funcion_1(t))
 plt.show()
+o4545l6
