@@ -15,6 +15,7 @@ cos= np.cos
 #Periodo, amplitud y definicion de Wo
 A=int(input("Ingrese la amplitud de las funciones: ")) 
 T= int(input("Ingrese el periodo de las funciones: ")) 
+ 
 Wo = 2*pi*(1/T)
 
 #Funciones sobre las cuales voy a trabajar
@@ -27,7 +28,7 @@ def funcion_2(t):
     return np.piecewise(t,[(0<=t) & (t<= (T/2)),((-T/2)<=t) & (t<=0)],[lambda t:A*seno(Wo*t), lambda t: 0])
 
 def funcion_3(t):
-    return abs(seno(Wo*t))
+    return np.piecewise(t, [(-T/2 <= t) & (t <= T/2)], [lambda t: A * abs(np.sin(Wo* t))])
 
 def funcion_4(t):
     return np.piecewise(t, [(0<=t) & (t<= (T/2)),((-T/2)<=t) & (t<=0)],[lambda t: (-4*A/T)*t+A, lambda t: (4*A/T)*t+A])
@@ -51,7 +52,7 @@ def serieDeFourier(funcion,maxcoeficientes):
             Bn.append((1/T)*quad(funcionB,-T/2,T/2)[0])
       
     sum = 0 #Inicializo la sumatoria de la serie de fourier en 0
-    for n in range(1,maxcoeficientes):
+    for n in range(1,maxcoeficientes+1):
             sum += (An[n]*cos(Wo*n*t) + Bn[n]*seno(Wo*n*t))
             print("A"+ str(n),"=", An[n]," | B"+ str(n),"=",Bn[n]) #Muestro en pantalla los coeficientes obtenidos 
 
@@ -61,9 +62,10 @@ def serieDeFourier(funcion,maxcoeficientes):
 #Parte principal del programa, donde se ejecuta la funcion serieDeFourier definida mas arriba
 while(1):
     maxcoeficientes = int(input("Ingrese la cantidad de coeficientes: ")) #Solicito la cantidad de coeficientes
+    t = np.arange(-T*maxcoeficientes/2,T*maxcoeficientes/2,0.001) #Se define el rango de la serie de fourier para que sea periodica 
     if(maxcoeficientes==0): #Cuando la cantidad es 0, termino el programa
         break
-    t = np.arange(-T*maxcoeficientes/4,T*maxcoeficientes/4,0.001) #Se define el rango de la serie de fourier para que sea periodica  
+   
 # Parte de grafico
 # Se defienen 4 graficos ordenados en una cuadrilla de 2x2
     fig, axs = plt.subplots(2, 2)
