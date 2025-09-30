@@ -16,7 +16,7 @@ Contenido de los ejercicios
   El programa finaliza al ingresar el comando salir.
 
   Si el usuario presiona CTRL+C, el programa espera a que terminen todos los procesos antes de finalizar, sin dejar procesos huérfanos    o zombies.
-
+---
 2. Creación de procesos hermanos con retorno de valores
 
 Programa que crea un número de procesos indicado por línea de comandos, todos hermanos.
@@ -28,6 +28,7 @@ Los procesos hijos permanecen en un loop eterno de espera no activa, hasta recib
 El proceso padre imprime la sumatoria de los retornos de los hijos.
 
 No se permiten procesos huérfanos ni zombies.
+---
 
 3. Sincronización de hilos con mutex
 
@@ -37,6 +38,8 @@ El número de iteraciones completas N se ingresa por línea de comandos.
 
 Se utiliza Mutex (librería pthread) para controlar el acceso a la sección crítica.
 
+---
+
 4. Sincronización de procesos con semáforos Posix con nombre
 
 Sincronización de procesos independientes A, B y C para ejecutar la secuencia ABAC....
@@ -45,13 +48,19 @@ Se detiene luego de N iteraciones completas (ingresadas por línea de comandos).
 
 Se utiliza semáforos Posix con nombre para la sincronización.
 
+---
+
 5. Sincronización de procesos con semáforos Posix sin nombre
 
 Igual que el ejercicio anterior, pero usando semáforos Posix sin nombre.
 
+---
+
 6. Sincronización de procesos con semáforos SVR4
 
 Igual que el ejercicio anterior, pero utilizando semáforos SVR4.
+
+---
 
 7. Sincronización de procesos emparentados
 
@@ -62,6 +71,8 @@ Secuencia de ejecución: PadreAHijoBPadreAHijoC....
 Se detiene luego de N iteraciones completas (ingresadas por línea de comandos).
 
 La sincronización se implementa sin usar señales, con la técnica más adecuada según el criterio del desarrollador.
+
+---
 
 8. Sincronización de hilos para suma de columnas de matriz
 
@@ -77,6 +88,8 @@ hiloQueMuestraTotalGeneral: espera la variable de condición V y muestra la suma
 
 Se implementa sincronización con variables de condición y mutex.
 
+---
+
 9. Ejecución de comandos con pipe
 
 Programa que recibe por línea de comandos un comando y sus argumentos.
@@ -88,6 +101,8 @@ Se utiliza pipe y las funciones dup() o dup2() para redirigir la salida.
 No se permite usar popen().
 
 Se evita la creación de procesos huérfanos o zombies.
+
+---
 
 10. Sistema de Monitoreo Distribuido
 
