@@ -29,8 +29,7 @@ No son proyectos grandes, pero muestran mi **evolución, práctica constante y a
 
 ## 🛠️ Tecnologías presentes
 
-- Python | C | C++ | JavaScript | Haskell | MATLAB  
-- Arduino IDE | ESP32  
+- Python | C | C++ | JavaScript | Haskell |
 - HTML / CSS  
 
 ---
