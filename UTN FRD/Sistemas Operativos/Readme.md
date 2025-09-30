@@ -5,17 +5,17 @@ Este repositorio contiene los ejercicios prácticos realizados durante la carrer
 Contenido de los ejercicios
 1. Shell con soporte de procesos foreground y background
 
-Implementación de un programa Shell completo que:
+  Implementación de un programa Shell completo que:
 
-Soporta ejecución de procesos en foreground y background.
+  Soporta ejecución de procesos en foreground y background.
 
-Utiliza la señal SIGCHLD para verificar la finalización de procesos en background.
+  Utiliza la señal SIGCHLD para verificar la finalización de procesos en background.
 
-Evita la existencia de procesos zombies.
+  Evita la existencia de procesos zombies.
 
-El programa finaliza al ingresar el comando salir.
+  El programa finaliza al ingresar el comando salir.
 
-Si el usuario presiona CTRL+C, el programa espera a que terminen todos los procesos antes de finalizar, sin dejar procesos huérfanos o zombies.
+  Si el usuario presiona CTRL+C, el programa espera a que terminen todos los procesos antes de finalizar, sin dejar procesos huérfanos    o zombies.
 
 2. Creación de procesos hermanos con retorno de valores
 
