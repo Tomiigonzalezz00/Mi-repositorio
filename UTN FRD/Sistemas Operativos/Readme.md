@@ -17,6 +17,7 @@ Contenido de los ejercicios
   El programa finaliza al ingresar el comando salir.
 
   Si el usuario presiona CTRL+C, el programa espera a que terminen todos los procesos antes de finalizar, sin dejar procesos huérfanos    o zombies.
+  
 ---
 2. Creación de procesos hermanos con retorno de valores
 
