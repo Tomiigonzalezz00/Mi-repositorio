@@ -3,8 +3,9 @@ Trabajos Prácticos de Sistemas y Programación Concurrente
 Este repositorio contiene los ejercicios prácticos realizados durante la carrera relacionados con procesos, hilos, sincronización y programación concurrente en C/C++ y sistemas Unix/Linux.
 
 Contenido de los ejercicios
-1. Shell con soporte de procesos foreground y background
 ---
+1. Shell con soporte de procesos foreground y background
+
   Implementación de un programa Shell completo que:
 
   Soporta ejecución de procesos en foreground y background.
@@ -16,9 +17,9 @@ Contenido de los ejercicios
   El programa finaliza al ingresar el comando salir.
 
   Si el usuario presiona CTRL+C, el programa espera a que terminen todos los procesos antes de finalizar, sin dejar procesos huérfanos    o zombies.
-
-2. Creación de procesos hermanos con retorno de valores
 ---
+2. Creación de procesos hermanos con retorno de valores
+
 Programa que crea un número de procesos indicado por línea de comandos, todos hermanos.
 
 Cada hijo retorna un valor entero único al padre.
@@ -28,19 +29,19 @@ Los procesos hijos permanecen en un loop eterno de espera no activa, hasta recib
 El proceso padre imprime la sumatoria de los retornos de los hijos.
 
 No se permiten procesos huérfanos ni zombies.
-
+---
 
 3. Sincronización de hilos con mutex
----
+
 Sincronización de los hilos A, B y C para ejecutar la secuencia ABAC....
 
 El número de iteraciones completas N se ingresa por línea de comandos.
 
 Se utiliza Mutex (librería pthread) para controlar el acceso a la sección crítica.
 
-
-4. Sincronización de procesos con semáforos Posix con nombre
 ---
+4. Sincronización de procesos con semáforos Posix con nombre
+
 Sincronización de procesos independientes A, B y C para ejecutar la secuencia ABAC....
 
 Se detiene luego de N iteraciones completas (ingresadas por línea de comandos).
