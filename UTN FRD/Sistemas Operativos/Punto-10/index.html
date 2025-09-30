@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<script src="../jquery-3.6.0.min.js"></script>	
+<script>
+$(document).ready(function () {
+	$("#btnps").click(function(){
+	    queryAjax("ps","-lax");
+	});
+	$("#btndf").click(function(){
+	    queryAjax("df","-h");
+	});
+	$("#btnmem").click(function(){
+	    queryAjax("cat","/proc/meminfo");
+	});
+	$("#btndel").click(function(){
+		document.getElementById("rta").innerHTML = "";
+	});
+});
+function queryAjax(comando,argumentos) {
+	$.ajax({
+		url: 'cgi-bin/cmd_cgi3',
+		type: 'post',
+		data: { cmd: comando, args: argumentos },
+		dataType: 'html',
+		success:function(response){
+			//var len = response.length;
+			//var sresponse = JSON.stringify(response);
+			//alert(response);
+			//alert(len);
+			document.getElementById("rta").innerHTML = response;
+		},
+		error:function(jqXHR,textStatus,errorThrown){
+			alert('Error: '+textStatus);alert('Error: '+errorThrown);
+		}
+	});
+}
+</script>
+</HEAD>
+<TITLE>Monitoreo Servidor</TITLE>
+<BODY>
+<h1>Opciones de monitoreo</h1>
+<ul>
+  <li><a href="cgi-bin/cmd_cgi?cmd=ps&args=-lax">Procesos</a></li>
+  <li><a href="cgi-bin/cmd_cgi?cmd=df&args=-h">Disco</a></li>
+  <li><a href="cgi-bin/cmd_cgi?cmd=cat&args=/proc/meminfo">Memoria</a></li>
+
+</ul>
+</BODY>
+</HTML>

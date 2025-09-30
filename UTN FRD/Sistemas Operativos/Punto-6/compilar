@@ -1,0 +1,13 @@
+cc crear.c -o crear
+cc insem.c -o insem
+cc versem.c -o versem
+
+cc PyV.c -Wall -g -c
+cc p6a.c -Wall -g -c
+cc p6b.c -Wall -g -c
+cc p6c.c -Wall -g -c
+
+gcc -Wall -g PyV.o p6a.o -o p6a
+gcc -Wall -g PyV.o p6b.o -o p6b
+gcc -Wall -g PyV.o p6c.o -o p6c
+

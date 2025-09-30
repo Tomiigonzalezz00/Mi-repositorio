@@ -1,0 +1,9 @@
+cc CrearSHM.c -o CrearMemoria -Wall -lrt 
+cc InitSHM.c -o IniciarMemoria -Wall -lrt -lpthread
+cc DelSHM.c -o BorrarMemoria -Wall -lrt 
+
+
+cc P5A.c -o PA -Wall -lrt -lpthread
+cc P5C.c -o PC -Wall -lrt -lpthread
+cc P5B.c -o PB -Wall -lrt -lpthread
+
