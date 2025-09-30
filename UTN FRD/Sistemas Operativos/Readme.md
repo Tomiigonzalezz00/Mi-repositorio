@@ -5,7 +5,7 @@ Este repositorio contiene los ejercicios prácticos realizados durante la carrer
 Contenido de los ejercicios
 ---
 1. Shell con soporte de procesos foreground y background
-
+---
   Implementación de un programa Shell completo que:
 
   Soporta ejecución de procesos en foreground y background.
