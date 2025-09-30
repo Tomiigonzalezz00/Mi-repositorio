@@ -7,20 +7,15 @@ No son proyectos grandes, pero muestran mi **evolución, práctica constante y a
 
 ## 📌 Contenido
 
-- **C / C++**
   - Algoritmos y estructuras de datos
   - Ejercicios de la carrera de Ingeniería en Sistemas
-- **Python**
   - Scripts de automatización
   - Ejercicios del curso Full Stack Python
   - Prácticas de manejo de archivos y estructuras
-- **JavaScript**
   - Ejemplos básicos de frontend
   - Validaciones de formularios
-- **Arduino / ESP32**
   - Control de displays
   - Proyectos de electrónica y microcontroladores
-- **Otros**
   - MATLAB: simulaciones y cálculos numéricos
   - Haskell: ejercicios funcionales de la carrera
 
