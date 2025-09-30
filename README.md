@@ -15,8 +15,6 @@ No son proyectos grandes, pero muestran mi **evolución, práctica constante y a
   - Ejemplos básicos de frontend
   - Validaciones de formularios
   - Control de displays
-  - Proyectos de electrónica y microcontroladores
-  - MATLAB: simulaciones y cálculos numéricos
   - Haskell: ejercicios funcionales de la carrera
 
 ---
